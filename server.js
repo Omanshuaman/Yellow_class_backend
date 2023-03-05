@@ -28,7 +28,10 @@ app.use(
 
 app.use(
   cors({
-    origin: "https://augment-frontend.onrender.com",
+    origin: [
+      "https://augment-frontend.onrender.com",
+      "https://augment-admin.onrender.com",
+    ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
