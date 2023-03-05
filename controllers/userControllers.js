@@ -5,9 +5,9 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, pic } = req.body;
+  const { name, email, phoneNumber, password, pic } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !phoneNumber) {
     res.status(400);
     throw new Error("Please provide all the required fields.");
   }
@@ -23,6 +23,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const newUser = new User({
       name: name,
       email: email,
+      phoneNumber: phoneNumber,
+
       password: hash,
     });
 
@@ -35,6 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
           _id: newUser._id,
           name: newUser.name,
           email: newUser.email,
+          phoneNumber: newUser.phoneNumber,
           pic: newUser.pic,
           token: generateToken(newUser._id),
         });

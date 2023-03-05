@@ -2,13 +2,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const colors = require("colors");
-const passport = require("passport");
-const passportSetup = require("./routes/passport");
+const pinRoute = require("./routes/pins");
 
 const userRoutes = require("./routes/userRoutes");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const authRoute = require("./routes/auth");
 
 const session = require("express-session");
 const bodyParser = require("body-parser");
@@ -28,9 +26,6 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -46,8 +41,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRoutes);
-
-app.use("/auth", authRoute);
+app.use("/api/todo", pinRoute);
 
 // Error Handling middlewares
 app.use(notFound);

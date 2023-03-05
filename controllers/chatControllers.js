@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const Pin = require("../models/pin");
-const JoinPin = require("../models/joinpins");
 
 const renameGroup = asyncHandler(async (req, res) => {
   const { chatId, chatName } = req.body;
